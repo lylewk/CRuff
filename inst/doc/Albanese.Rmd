@@ -1,0 +1,83 @@
+---
+title: "Albanese et al. (2016) stature"
+author: "Lyle W. Konigsberg"
+date: "`r Sys.Date()`"
+bibliography: bibliography.bibtex
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Albanese et al. (2016) stature}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r eval=T}
+library(C.Ruff)
+```
+
+We will first do the default call to "A_run" which uses the femur equation from @RN10415 and applies it to the "European" data set from @RN12182. See "European data set: Excel" and "Notes" under "Special Projects" [here](https://fae.johnshopkins.edu/chris-ruff/).
+
+```{r fig.dim=c(6,6)}
+A_run()
+```
+
+Let's see for the total data set whether the proportion of cases in the 50 percent prediction interval actually contains 50 percent of the data.  That is a straight-forward binomial test:
+```{r }
+sto=294+678+90
+print(sto)
+print(binom.test(678,sto,0.5))
+```
+OK, not so good.  The probability value is quite low, because the 95% confidence interval for the proportion in the 50% prediction interval is from about 0.6087 to 0.6674. It is even worse if we compare the proportion of cases below the 50% PIs to the total of those above and those below.
+```{r }
+sto=294+90
+print(sto)
+print(binom.test(294,sto,0.5))
+```
+OK, so that shows that the bulk of the cases (actual statures) are below the 50% PIs.  We would have expected about half should be below and half should be above.  But, that is not happening because the estimated statures are biased.  Generally, the estimates are greater than the actual statures, as in the plot.
+
+Now let's use the female Iberian data and the humerus.
+
+```{r fig.dim=c(6,6)}
+A_run(i.which="Hum",which.dat=3)
+```
+
+Now let's do the binomial test for the proportion in the 50% prediction intervals for the overall data.
+
+```{r }
+sto=25+15+2
+print(sto)
+print(binom.test(25,sto,0.5))
+```
+
+Not bad!  The probability value is (sort of) high and the 95% confidence interval for the proportion in the 50% PIs contains 0.5.  Now let's look for bias.
+
+```{r }
+sto=25+2
+print(sto)
+print(binom.test(25,sto,0.5))
+```
+
+Terrible! The @RN10415 equation is clearly overestimating stature.  This is not suprising, as on the overall dataset there was overestimation, and the Iberian females have one of the lowest average statures of any of the regional groups...
+
+```{r }
+attach(Europe)
+sto=aggregate(Stat~Sex*Region,FUN=mean)
+Ord=sort(sto$Stat,index.ret=T)$ix
+print(sto[Ord,])
+```
+
+...while still having an appreciable sample size
+```{r}
+print(table(data.frame(Sex,Region)))
+```
+
+
+#### References
+
+

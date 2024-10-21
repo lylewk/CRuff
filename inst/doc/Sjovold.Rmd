@@ -1,0 +1,75 @@
+---
+title: "Sjovold (1990) stature"
+author: "Lyle W. Konigsberg"
+date: "`r Sys.Date()`"
+bibliography: bibliography.bibtex
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Sjovold (1990) stature}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r eval=T}
+library(C.Ruff)
+```
+
+We will first do the call to "S_run(which.parms=2)" which uses the femur equation from @RN9000 and applies it to the "European" data set from @RN12182. See "European data set: Excel" and "Notes" under "Special Projects" [here](https://fae.johnshopkins.edu/chris-ruff/).  The "which.parms=2" uses Table 2 from @RN9000 which is for "all ethnic gro[u]ps independent of sex."
+
+```{r fig.dim=c(6,6)}
+S_run(which.parms=2)
+```
+We could have instead done the default run, which uses "which.parms=1" for Table 1 ("Caucasians independent of sex"). This makes sense as the test data from Ruff is all from Europeans, though the use of the term "Caucasians" in @RN9000 represents pre-millennium terminology.
+
+```{r fig.dim=c(6,6)}
+S_run()
+```
+
+Let's see for the total data set whether the proportion of cases in the 50 percent prediction interval actually contains 50 percent of the data.  That is a straight-forward binomial test:
+```{r }
+sto=573+466+23
+print(sto)
+print(binom.test(466,sto,0.5))
+```
+OK, not so good.  The probability value is quite low, because the 95% confidence interval for the proportion in the 50% prediction interval is from about 0.4087 to 0.4692. It is even worse if we compare the proportion of cases below the 50% PIs to the total of those above and those below.
+```{r }
+sto=573+23
+print(sto)
+print(binom.test(573,sto,0.5))
+```
+OK, so that shows that the bulk of the cases (actual statures) are below the 50% PIs.  We would have expected about half should be below and half should be above.  But, that is not happening because the estimated statures are biased.  Generally, the estimates are greater than the actual statures, as in the plot.
+
+Now let's use the female Iberian data and the humerus.
+
+```{r fig.dim=c(6,6)}
+S_run(i.which="Hum",which.dat=3)
+```
+
+Now let's do the binomial test for the proportion in the 50% prediction intervals for the overall data.
+
+```{r }
+sto=14+22+6
+print(sto)
+print(binom.test(22,sto,0.5))
+```
+
+Great!  The probability value is (quite) high and the 95% confidence interval for the proportion in the 50% PIs contains 0.5.  Now let's look for bias.
+
+```{r }
+sto=14+6
+print(sto)
+print(binom.test(14,sto,0.5))
+```
+
+Also great! The @RN9000 equation is doing well on a short-statured sample, as we might expect for a method (reduced major axis) that is supposed to correct for reference sample composition (though less so than for classical calibration?)
+
+#### References
+
+
