@@ -3,7 +3,6 @@
 \docType{data}
 \name{short}
 \alias{short}
-\alias{tall}
 \title{short}
 \format{
 A 5 column by 139 row data frame.
