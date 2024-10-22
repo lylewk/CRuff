@@ -118,44 +118,6 @@
 #' Ruff, C.B. (ed.) (2018) \emph{Skeletal variation and adaptation in Europeans:
 #' Upper Paleolithic to the Twentieth Century}. Hoboken: Wiley Blackwell.
 "Europe"
-#' Subset of European data
-#'
-#' A subset of the European data.  The data come from Ruff (2018).  Excludes individuals
-#' with statures that were estimated using Niskanen & Ruff (2018).
-#'
-#' @details Data as follows:
-#' \itemize{
-#'  \item{Region:}{  Geographic region}
-#'  \item{Subregion:}{  Geographic subregion}
-#'  \item{Site:}{  Site}
-#'  \item{ID:}{  Unique identifier}
-#'  \item{Museum:}{  Museum}
-#'  \item{Sex:}{  Sex as a factor, either "Female" or "Male"}
-#'  \item{Stat:}{  Stature in mm.}
-#'  \item{Fem:}{  Maximum femur length in mm.}
-#'  \item{Tib:}{  Maximum tibia length in mm.}
-#'  \item{Hum:}{  Maximum humerus length in mm.}
-#'  \item{Rad:}{  Maximum radius length in mm.}
-#' }
-#' @docType data
-#' @keywords datasets
-#' @name Europe2
-#' @usage data(Europe2)
-#' @format A data frame with 536 rows and 11 variables
-#' @source{
-#' See "European data set: Excel" and "Notes" under "Special Projects"
-#' \url{https://fae.johnshopkins.edu/chris-ruff/}
-#' }
-#' @references
-#' Raxter, M.H., Auerbach, B.M. and Ruff, C.B. (2006) A revision of the Fully technique
-#' for estimating statures. \emph{Am. J. Phys. Anthropol}. 130, 374-384.
-#'
-#' Raxter, M.H., Ruff, C.B. and Auerbach, B.M. (2007) Technical note: Revised Fully
-#' stature estimation technique. \emph{Am. J. Phys. Anthropol}. 133, 817-818.
-#'
-#' Ruff, C.B. (ed.) (2018) \emph{Skeletal variation and adaptation in Europeans:
-#' Upper Paleolithic to the Twentieth Century}. Hoboken: Wiley Blackwell.
-"Europe2"
 #' Variance-covariance matrix
 #'
 #' This data is the variance-covariance matrix among stature and maximum femur,
@@ -188,10 +150,10 @@
 #'  & M. Finnegan (Eds.), \emph{New Perspectives in Forensic Human Skeletal
 #'  Identification} (pp. 87-104). Cambridge, MA: Academic Press.
 "mu"
-#' Iberian females
+#' short
 #'
 #' @details This is a subset of the "Europe" data frame that includes only
-#' Iberian females.
+#' Iberian, French, and Italian females.
 #' Data is as follows:
 #' \itemize{
 #'  \item{Stat:}{  Stature in mm.}
@@ -202,7 +164,25 @@
 #' }
 #' @docType data
 #' @keywords datasets
-#' @name Iberia
-#' @usage data(Iberia)
-#' @format A 5 column by 57 row data frame.
-"Iberia"
+#' @name short
+#' @usage data(short)
+#' @format A 5 column by 139 row data frame.
+"tall"
+#' tall
+#'
+#' @details This is a subset of the "Europe" data frame that includes only males
+#' from the Balkans, Scandinavia, or Finland.
+#' Data is as follows:
+#' \itemize{
+#'  \item{Stat:}{  Stature in mm.}
+#'  \item{Fem:}{  Maximum femur length in mm.}
+#'  \item{Tib:}{  Maximum tibia length in mm.}
+#'  \item{Hum:}{  Maximum humerus length in mm.}
+#'  \item{Rad:}{  Maximum radius length in mm.}
+#' }
+#' @docType data
+#' @keywords datasets
+#' @name tall
+#' @usage data(tall)
+#' @format A 5 column by 179 row data frame.
+"tall"

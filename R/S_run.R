@@ -15,8 +15,8 @@
 #' Table 1 is "Caucasians independent of sex" while Table 2 is "all ethnic groups
 #' independent of sex."  Default value: 1.
 #' @details Estimates statures using \link{Europe} data with modified Fully statures
-#' from skeletal height or partial skeletal height, \link{Europe2} data set from
-#' skeletal height only, or \link{Iberia} subset of "Europe" that only includes Iberian females.
+#' from skeletal height or partial skeletal height, \link{short} data set from
+#' short individuals, or \link{tall} data set from tall individuals.
 #' The regression equations are from Sjøvold (1990) Table 1 or 2.
 #' @return Does a plot of statures estimated from the  (2016) regression
 #' equations against the (modified) Fully statures.  Also returns the overall bias and
@@ -35,20 +35,20 @@
 #'   S_run()
 #' # "all ethnic groups independent of sex"
 #'   S_run(which.parms=2)
-#' # Using tibia, Iberian female data, and default area = 0.5
-#'   A_run(i.which='Tib',which.dat=3)
+#' # Using tibia, "short" data, and default area = 0.5
+#'   A_run(i.which='Tib',which.dat=2)
 #' @export
 
 S_run=function(i.which='Fem',which.dat=1,area=0.5,which.parms=1){
   if(which.dat==1) data(Europe)
-  else if(which.dat==2){data(Europe2)}
-  else(data(Iberia))
+  else if(which.dat==2){data(short)}
+  else(data(tall))
   bones=c('Fem','Tib','Hum','Rad')
   Row = which(i.which==bones)
   if(which.parms==1) parms=S_reg[Row,]
   else{parms=S2_reg[Row,]}
   if(which.dat==1) dat = Europe[,c(7,7+Row)]
-  else if(which.dat==2){dat = Europe2[,c(7,7+Row)]}
-  else {dat=Iberia[,c(1,1+Row)]}
+  else if(which.dat==2){dat=short[,c(1,1+Row)]}
+  else {dat=tall[,c(1,1+Row)]}
   run_it(parms,dat,i.which,'Sjovold (1990),',area)
 }
