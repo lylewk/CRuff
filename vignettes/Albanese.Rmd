@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r eval=T}
-library(C.Ruff)
+library(CRuff)
 ```
 
 We will first do the default call to "A_run" which uses the femur equation from @RN10415 and applies it to the "European" data set from @RN12182. See "European data set: Excel" and "Notes" under "Special Projects" [here](https://fae.johnshopkins.edu/chris-ruff/).
@@ -41,7 +41,31 @@ print(binom.test(294,sto,0.5))
 ```
 OK, so that shows that the bulk of the cases (actual statures) are below the 50% PIs.  We would have expected about half should be below and half should be above.  But, that is not happening because the estimated statures are biased.  Generally, the estimates are greater than the actual statures, as in the plot.
 
-Now let's use the female Iberian data and the humerus.
+Now let's use the "short" data and the humerus.
+
+```{r fig.dim=c(6,6)}
+A_run(i.which="Hum",which.dat=2)
+```
+
+Now let's do the binomial test for the proportion in the 50% prediction intervals for the overall data.
+
+```{r }
+sto=57+65+6
+print(sto)
+print(binom.test(65,sto,0.5))
+```
+
+Great!  The probability value is high and the 95% confidence interval for the proportion in the 50% PIs (0.4180 to 0.5972) contains 0.5.  Now let's look for bias.
+
+```{r }
+sto=57+6
+print(sto)
+print(binom.test(57,sto,0.5))
+```
+
+Terrible! The @RN10415 equation is clearly overestimating stature.  This is not surprising, as on the overall dataset there was overestimation, and the "short" females have a low average stature.
+
+Now let's use the "tall" data and the humerus.
 
 ```{r fig.dim=c(6,6)}
 A_run(i.which="Hum",which.dat=3)
@@ -50,33 +74,20 @@ A_run(i.which="Hum",which.dat=3)
 Now let's do the binomial test for the proportion in the 50% prediction intervals for the overall data.
 
 ```{r }
-sto=25+15+2
+sto=80+77+14
 print(sto)
-print(binom.test(25,sto,0.5))
+print(binom.test(77,sto,0.5))
 ```
 
-Not bad!  The probability value is (sort of) high and the 95% confidence interval for the proportion in the 50% PIs contains 0.5.  Now let's look for bias.
+Great!  The probability value is high and the 95% confidence interval for the proportion in the 50% PIs (0.3742 to 0.5281) contains 0.5.  Now let's look for bias.
 
 ```{r }
-sto=25+2
+sto=80+14
 print(sto)
-print(binom.test(25,sto,0.5))
+print(binom.test(80,sto,0.5))
 ```
 
-Terrible! The @RN10415 equation is clearly overestimating stature.  This is not suprising, as on the overall dataset there was overestimation, and the Iberian females have one of the lowest average statures of any of the regional groups...
-
-```{r }
-attach(Europe)
-sto=aggregate(Stat~Sex*Region,FUN=mean)
-Ord=sort(sto$Stat,index.ret=T)$ix
-print(sto[Ord,])
-```
-
-...while still having an appreciable sample size
-```{r}
-print(table(data.frame(Sex,Region)))
-```
-
+Terrible! The @RN10415 equation is clearly overestimating stature.  This \emph{is} surprising, as on the overall dataset there was overestimation, and the "tall" males already have high average stature.
 
 #### References
 
