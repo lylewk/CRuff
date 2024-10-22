@@ -12,7 +12,7 @@ A_run(i.which = "Fem", which.dat = 1, area = 0.5)
 humerus length, or "Rad" for maximum radius length.  Default: "Fem"}
 
 \item{which.dat}{Integer indicating which data to use. Possible values are 1 for
-"Europe" data, 2 for "Europe2" data, or any other integer for "Iberia". Default=1}
+"Europe" data, 2 for "short" data, or any other integer for "tall". Default=1}
 
 \item{area}{Decimal value giving the proportion for the prediction interval.  Value
 must be greater than 0.0 and less than 1.0. Default = 0.5}
@@ -34,16 +34,16 @@ and "partial" skeletal height for just Iberian females.
 }
 \details{
 Estimates statures using \link{Europe} data with modified Fully statures
-from skeletal height or partial skeletal height, \link{Europe2} data set from
-skeletal height only, or \link{Iberia} subset of "Europe" that only includes Iberian females.
+from skeletal height or partial skeletal height, \link{short} data set from
+short individuals, or \link{tall} that only includes tall individuals.
 The regression equations are from Albanese et al. (2016) Table 3 - "Generic stature
 equations (both sexes combined)".
 }
 \examples{
 # Default using femur, European data, and area = 0.5
   A_run()
-# Using tibia, Iberian female data, and default area = 0.5
-  A_run(i.which='Tib',which.dat=3)
+# Using tibia, short data, and default area = 0.5
+  A_run(i.which='Tib',which.dat=2)
 }
 \references{
 Albanese, J., Tuck, A., Gomes, J., & Cardoso, H. F. (2016). An alternative

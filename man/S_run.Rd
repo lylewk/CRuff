@@ -39,8 +39,8 @@ and "partial" skeletal height for just Iberian females.
 }
 \details{
 Estimates statures using \link{Europe} data with modified Fully statures
-from skeletal height or partial skeletal height, \link{Europe2} data set from
-skeletal height only, or \link{Iberia} subset of "Europe" that only includes Iberian females.
+from skeletal height or partial skeletal height, \link{short} data set from
+short individuals, or \link{tall} data set from tall individuals.
 The regression equations are from Sjøvold (1990) Table 1 or 2.
 }
 \examples{
@@ -49,8 +49,8 @@ The regression equations are from Sjøvold (1990) Table 1 or 2.
   S_run()
 # "all ethnic groups independent of sex"
   S_run(which.parms=2)
-# Using tibia, Iberian female data, and default area = 0.5
-  A_run(i.which='Tib',which.dat=3)
+# Using tibia, "short" data, and default area = 0.5
+  A_run(i.which='Tib',which.dat=2)
 }
 \references{
 Sjøvold, T. (1990). Estimation of stature from long bones utilizing
