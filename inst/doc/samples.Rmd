@@ -1,0 +1,42 @@
+---
+title: "Samples"
+author: "Lyle W. Konigsberg"
+date: "`r Sys.Date()`"
+bibliography: bibliography.bibtex
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Samples}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r eval=T}
+library(CRuff)
+```
+
+We will start with the "European data set: Excel" and "Notes" under "Special Projects" [here](https://fae.johnshopkins.edu/chris-ruff/). The data are described in detail in @RN12182. Below is a tabulation by (sorted) mean statures...
+
+```{r }
+attach(Europe)
+sto=aggregate(Stat~Sex*Region,FUN=mean)
+Ord=sort(sto$Stat,index.ret=T)$ix
+print(sto[Ord,])
+```
+
+... and sample sizes.
+```{r}
+print(table(data.frame(Sex,Region)))
+```
+
+On the basis of this information, we form data sets called "short" (females from France, Iberia, and Italy) and "tall" (males from the Balkans, Scandinavia, and Finland).
+
+#### References
+
+

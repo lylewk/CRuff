@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r eval=T}
-library(C.Ruff)
+library(CRuff)
 ```
 
 We will first do the call to "S_run(which.parms=2)" which uses the femur equation from @RN9000 and applies it to the "European" data set from @RN12182. See "European data set: Excel" and "Notes" under "Special Projects" [here](https://fae.johnshopkins.edu/chris-ruff/).  The "which.parms=2" uses Table 2 from @RN9000 which is for "all ethnic gro[u]ps independent of sex."
@@ -46,7 +46,31 @@ print(binom.test(573,sto,0.5))
 ```
 OK, so that shows that the bulk of the cases (actual statures) are below the 50% PIs.  We would have expected about half should be below and half should be above.  But, that is not happening because the estimated statures are biased.  Generally, the estimates are greater than the actual statures, as in the plot.
 
-Now let's use the female Iberian data and the humerus.
+Now let's use the female "short" data and the humerus.
+
+```{r fig.dim=c(6,6)}
+S_run(i.which="Hum",which.dat=2)
+```
+
+Now let's do the binomial test for the proportion in the 50% prediction intervals for the overall data.
+
+```{r }
+sto=30+66+32
+print(sto)
+print(binom.test(66,sto,0.5))
+```
+
+Great!  The probability value is (quite) high and the 95% confidence interval for the proportion in the 50% PIs (0.4257 to 0.6048) contains 0.5.  Now let's look for bias.
+
+```{r }
+sto=30+32
+print(sto)
+print(binom.test(30,sto,0.5))
+```
+
+Also great! The @RN9000 equation is doing well on a short-statured sample, as we might expect for a method (reduced major axis) that is supposed to correct for reference sample composition (though less so than for classical calibration?)
+
+Now let's use the male "tall" data and the humerus.
 
 ```{r fig.dim=c(6,6)}
 S_run(i.which="Hum",which.dat=3)
@@ -55,20 +79,20 @@ S_run(i.which="Hum",which.dat=3)
 Now let's do the binomial test for the proportion in the 50% prediction intervals for the overall data.
 
 ```{r }
-sto=14+22+6
+sto=100+59+12
 print(sto)
-print(binom.test(22,sto,0.5))
+print(binom.test(59,sto,0.5))
 ```
 
-Great!  The probability value is (quite) high and the 95% confidence interval for the proportion in the 50% PIs contains 0.5.  Now let's look for bias.
+Not good!  The probability value is very low and the 95% confidence interval for the proportion in the 50% PIs (0.2741 to 0.4214) does not contain.  Now let's look for bias.
 
 ```{r }
-sto=14+6
+sto=100+12
 print(sto)
-print(binom.test(14,sto,0.5))
+print(binom.test(100,sto,0.5))
 ```
 
-Also great! The @RN9000 equation is doing well on a short-statured sample, as we might expect for a method (reduced major axis) that is supposed to correct for reference sample composition (though less so than for classical calibration?)
+And @RN9000 is over-estimating stature for the tall. Not good!
 
 #### References
 
