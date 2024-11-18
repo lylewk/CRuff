@@ -21,7 +21,7 @@ for(i in 1:N){
 out=data.frame(dat[,1],out)
 colnames(out)=c('actual','lo.25','est','hi.25')
 #windows()
-plot(out$actual,out$est,xlab='Actual',ylab='Estimated',
+plot(out$actual,out$est,xlab='Actual (mm.)',ylab='Estimated (mm.)',
      main=paste(observer,labs2[bone]))
 abline(0,1)
 
